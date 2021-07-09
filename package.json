@@ -1,0 +1,19 @@
+{
+  "name": "puppeteerdome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
+    "node-html-parser": "^4.0.0",
+    "puppeteer": "^10.1.0"
+  }
+}
