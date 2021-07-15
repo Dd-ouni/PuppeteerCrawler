@@ -14,7 +14,7 @@ const btoa = (s) => (new Buffer(s, 'utf8')).toString('base64');
 puppeteer.launch({
     headless: false,
     ignoreHTTPSErrors: false, // 忽略 HTTPS 错误
-    devtools: true,
+    devtools: false,
     // slowMo: 250, // Puppeteer 操作减少指定的毫秒数看清发生了什么，这很有用
     defaultViewport: {
         width: 800,
@@ -61,8 +61,6 @@ puppeteer.launch({
     // 执行js脚本
     console.dir(dim);
 
-    // await sleep(2000);
-
     await page.screenshot({ path: 'douyin.png' });
 
     // await sleep(10000);
@@ -78,51 +76,9 @@ async function scriptDebugger2(page) {
         debugger;
     });
     client.on('Debugger.paused', async (args) => {
-        // let callFrameIndex = 0;
-        // while (true) {
-        //     if (args.callFrames[callFrameIndex].functionName == 'Ya') {
-        //         // 执行脚本
-        //         await client.send('Runtime.enable');
-        //         // let compileScriptResult = await client.send('Runtime.compileScript', {
-        //         //     // expression: "if(!Ya.GetData){window.GetDouYinData=Ya.GetData=function(){Ar(\"/aweme/v1/web/channel/feed/\",Ha(Ha({},Va),{},(Wa(t={},\"tag_id\",a),Wa(t,\"count\",i),t)),c,Ka,{errorTags:{tagId:a}},(function(e){var t;return 0===e.statusCode&&0===(null===(t=e.awemeList)||void 0===t?void 0:t.length)}))}}",
-        //         //     expression: "alert(123);",
-        //         //     persistScript: false,
-        //         //     sourceURL: ""
-        //         // });
-        //         let callFrameResult = await client.send('Debugger.evaluateOnCallFrame',
-        //             {
-        //                 callFrameId: args.callFrames[callFrameIndex].callFrameId,
-        //                 // expression: "if(!Ya.GetData){alert(123);window.GetDouYinData=Ya.GetData=function(){Ar(\"/aweme/v1/web/channel/feed/\",Ha(Ha({},Va),{},(Wa(t={},\"tag_id\",a),Wa(t,\"count\",i),t)),c,Ka,{errorTags:{tagId:a}},(function(e){var t;return 0===e.statusCode&&0===(null===(t=e.awemeList)||void 0===t?void 0:t.length)}))}}",
-        //                 expression: "alert(123)",
-        //                 generatePreview: true,
-        //                 includeCommandLineAPI: true,
-        //                 throwOnSideEffect: true,
-        //                 timeout: 500,
-        //             });
-        //         // console.log("scriptId: ", callFrameResult.exceptionDetails.scriptId, compileScriptResult);
-        //         // let runScriptResult = await client.send('Runtime.runScript',
-        //         //     {
-        //         //         scriptId: callFrameResult.exceptionDetails.scriptId
-        //         //     });
-
-
-        //         // 删除断点
-        //         await client.send('Debugger.removeBreakpoint', {
-        //             breakpointId: args.hitBreakpoints[0]
-        //         });
-        //         // 恢复执行
-        //         await client.send('Debugger.resume', {
-        //             terminateOnResume: false
-        //         });
-
-        //         // console.log(compileScriptResult, callFrameResult);
-        //         console.log(callFrameResult, runScriptResult);
-        //         break;
-        //     }
-        //     callFrameIndex++;
-        // }
 
         await client.send('Runtime.enable');
+
         let compileScriptResult = await client.send('Runtime.compileScript', {
             // executionContextId: 1,
             expression: "(function(){if(!Ya.GetData){window.GetDouYinData=Ya.GetData=function(){Ar(\"/aweme/v1/web/channel/feed/\",Ha(Ha({},Va),{},(Wa(t={},\"tag_id\",a),Wa(t,\"count\",i),t)),c,Ka,{errorTags:{tagId:a}},(function(e){var t;return 0===e.statusCode&&0===(null===(t=e.awemeList)||void 0===t?void 0:t.length)}))}}})()",
@@ -142,7 +98,6 @@ async function scriptDebugger2(page) {
                 silent: false
             });
 
-
         // 删除断点
         await client.send('Debugger.removeBreakpoint', {
             breakpointId: args.hitBreakpoints[0]
@@ -155,13 +110,12 @@ async function scriptDebugger2(page) {
         console.log(callFrameResult, compileScriptResult);
     });
     client.on('Debugger.scriptParsed', async (args) => {
-        if (args.url == "https://sf1-scmcdn-tos.pstatp.com/goofy/ies/douyin_web/index.6c44f9b9.js") {
-
+        if (args.url == "https://sf1-scmcdn-tos.pstatp.com/goofy/ies/douyin_web/index.0da676cf.js") {
             await client.send('Debugger.setBreakpointsActive', { active: true });
             const breakpointId = await client.send('Debugger.setBreakpointByUrl', {
                 columnNumber: 71045,
                 lineNumber: 0,
-                url: "https://sf1-scmcdn-tos.pstatp.com/goofy/ies/douyin_web/index.6c44f9b9.js"
+                url: "https://sf1-scmcdn-tos.pstatp.com/goofy/ies/douyin_web/index.0da676cf.js"
             });
             console.log(args.url, " executionContextId", args.executionContextId);
         }

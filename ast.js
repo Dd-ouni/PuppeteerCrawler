@@ -31,32 +31,32 @@ async function run() {
     var cc = code.replace(new RegExp(`Ar("/aweme/v1/web/channel/feed/",Ha(Ha({},Va),{},(Wa(t={},"tag_id",a),Wa(t,"count",i),t)),c,Ka,{errorTags:{tagId:a}},(function(e){var t;return 0===e.statusCode&&0===(null===(t=e.awemeList)||void 0===t?void 0:t.length)}));`, "g"), `Ar("/aweme/v1/web/channel/feed/",Ha(Ha({},Va),{},(Wa(t={},"tag_id",a),Wa(t,"count",i),t)),c,Ka,{errorTags:{tagId:a}},(function(e){var t;return 0===e.statusCode&&0===(null===(t=e.awemeList)||void 0===t?void 0:t.length)}));if(!Ya.GetData){window.GetDouYinData=Ya.GetData=function(){Ar("/aweme/v1/web/channel/feed/",Ha(Ha({},Va),{},(Wa(t={},"tag_id",a),Wa(t,"count",i),t)),c,Ka,{errorTags:{tagId:a}},(function(e){var t;return 0===e.statusCode&&0===(null===(t=e.awemeList)||void 0===t?void 0:t.length)}))}};`);
 
     console.log(cc);
-    debugger;
+
     // const ast = parse(atob(code));
 
-    // traverse(ast, {
-    //     CallExpression: function (path) {
-    //         path.replaceWithSourceString('function (a) { console.log(i) }');
-    //         // let node = template(`function ccc() {  }, ccc()`);
-    //         // path.replaceWith(node);
-    //         // path.insertAfter(node)
-    //         // console.log(node);
-    //         // path.insertBefore(path.node);
-    //         // path.insertAfter(types.valueToNode(`gg = 12`))
-    //         // path.replaceWithSourceString('gg = 12, ll = 13');
-    //         // path.replaceWithSourceString(types.expressionStatement(types.stringLiteral("A little high, little low.")))
-    //         // path.replaceInline(types.valueToNode(`console.log(789)`))
-    //         // path.insertAfter(t.expressionStatement(t.stringLiteral("A little high, little low.")));
-    //         // path.insertAfter(types.valueToNode("console.log(123);"));
-    //         // debugger;
-    //         // if(path.node.callee.name == "Ar"){
-    //         //     debugger;
-    //         // }
-    //         // if (path.parent.type == "AssignmentExpression" && path.node.callee.name) {
-    //         //     debugger;
-    //         // }
-    //     }
-    // });
+    traverse(ast, {
+        CallExpression: function (path) {
+            path.replaceWithSourceString('function (a) { console.log(i) }');
+            // let node = template(`function ccc() {  }, ccc()`);
+            // path.replaceWith(node);
+            // path.insertAfter(node)
+            // console.log(node);
+            // path.insertBefore(path.node);
+            // path.insertAfter(types.valueToNode(`gg = 12`))
+            // path.replaceWithSourceString('gg = 12, ll = 13');
+            // path.replaceWithSourceString(types.expressionStatement(types.stringLiteral("A little high, little low.")))
+            // path.replaceInline(types.valueToNode(`console.log(789)`))
+            // path.insertAfter(t.expressionStatement(t.stringLiteral("A little high, little low.")));
+            // path.insertAfter(types.valueToNode("console.log(123);"));
+            // debugger;
+            // if(path.node.callee.name == "Ar"){
+            //     debugger;
+            // }
+            // if (path.parent.type == "AssignmentExpression" && path.node.callee.name) {
+            //     debugger;
+            // }
+        }
+    });
 
     // const result_js_code = generator(ast).code;
     // console.log(result_js_code);
